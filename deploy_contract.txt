@@ -1,0 +1,199 @@
+const wrapperAbi = [
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "x",
+        "type": "bytes14"
+      },
+      {
+        "name": "byteInd",
+        "type": "uint256"
+      }
+    ],
+    "name": "getInt8FromByte",
+    "outputs": [
+      {
+        "name": "",
+        "type": "int8"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "reserve",
+        "type": "address"
+      },
+      {
+        "name": "tokens",
+        "type": "address[]"
+      }
+    ],
+    "name": "getBalances",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ratesContract",
+        "type": "address"
+      },
+      {
+        "name": "tokenList",
+        "type": "address[]"
+      }
+    ],
+    "name": "getTokenIndicies",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "x",
+        "type": "bytes14"
+      },
+      {
+        "name": "byteInd",
+        "type": "uint256"
+      }
+    ],
+    "name": "getByteFromBytes14",
+    "outputs": [
+      {
+        "name": "",
+        "type": "bytes1"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "pure",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "network",
+        "type": "address"
+      },
+      {
+        "name": "srcs",
+        "type": "address[]"
+      },
+      {
+        "name": "dests",
+        "type": "address[]"
+      },
+      {
+        "name": "qty",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "getExpectedRates",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "ratesContract",
+        "type": "address"
+      },
+      {
+        "name": "tokenList",
+        "type": "address[]"
+      }
+    ],
+    "name": "getTokenRates",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      },
+      {
+        "name": "",
+        "type": "int8[]"
+      },
+      {
+        "name": "",
+        "type": "int8[]"
+      },
+      {
+        "name": "",
+        "type": "uint256[]"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
+
+const wrapperAddress = '0x6172afc8c00c46e0d07ce3af203828198194620a'
+
+const contract = new web3.eth.Contract(wrapperAbi, wrapperAddress);
+
+const KYBER_NETWORK_CONTRACT_ADDRESS = '0x91a502C678605fbCe581eae053319747482276b9'
+
+const ETH_TOKEN_ADDRESS = '0xdd974D5C2e2928deA5F71b9825b8b646686BD200'
+
+const OMG_TOKEN_ADDRESS = '0xd26114cd6EE289AccF82350c8d8487fedB8A0C07'
+
+const APPC_TOKEN_ADDRESS = '0x1a7a8bd9106f2b8d977e08582dc7d24c723ab0db'
+
+var balance = 0.1
+
+var ETH_WEI_QTY = web3.utils.toWei(balance.toString(),'ether')
+var OMG_WEI_QTY = web3.utils.toWei(balance.toString(),'ether')
+
+var rates = contract.methods.getExpectedRates(
+    KYBER_NETWORK_CONTRACT_ADDRESS, //address network
+    [ETH_TOKEN_ADDRESS,OMG_TOKEN_ADDRESS], //address[] src
+    [APPC_TOKEN_ADDRESS,ETH_TOKEN_ADDRESS],  //address[] dest
+    [ETH_WEI_QTY,OMG_WEI_QTY]).call() //uint256[] qty
+
+constract.deploy({ data: commentContract.bytecode })
+    .send({ from: coinbase, gas: 1500000 })
+    .then(console.log);
